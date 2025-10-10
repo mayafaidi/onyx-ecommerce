@@ -14,8 +14,9 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
+import { Link } from "react-router-dom";
+import { useQuery } from '@tanstack/react-query';
 
-const pages = ['home', 'contectus', 'about us', 'profile', 'all products'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -35,18 +36,34 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+//   const fetchprofile = async ()=>{
+// const response = await AxiosIntanse.get("/Users/profile");
+// return response.data;
+// }
+
+// const { data, isLoading, error } = useQuery({
+//   queryKey: ['User'],
+//   queryFn: fetchprofile,
+//   staleTime: 1000 * 60 * 5,
+// });
+
+// console.log("User profile data:", data); 
+
+
+
+
 
   return (
-    <AppBar position="static"sx={{backgroundColor:"#070e25ff"}}>
+    <AppBar position="static" sx={{ backgroundColor: "#070e25ff" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* شعار اللوجو */}
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+
+          {/* شعار الموقع */}
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -60,7 +77,7 @@ function ResponsiveAppBar() {
             Onyx
           </Typography>
 
-          {/* القائمة للهاتف */}
+          {/* قائمة الجوال */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -88,21 +105,18 @@ function ResponsiveAppBar() {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem component={Link} to="/" onClick={handleCloseNavMenu}>Home</MenuItem>
+              <MenuItem component={Link} to="/product" onClick={handleCloseNavMenu}>Products</MenuItem>
+              <MenuItem component={Link} to="/about" onClick={handleCloseNavMenu}>About Us</MenuItem>
             </Menu>
           </Box>
 
-          {/* شعار الهاتف */}
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* شعار الجوال */}
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -117,37 +131,29 @@ function ResponsiveAppBar() {
             Onyx
           </Typography>
 
-          {/* روابط الصفحات للشاشة الكبيرة */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+          {/* روابط الصفحات (لشاشة كبيرة) */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2 }}>
+            <Button component={Link} to="/" sx={{ my: 2, color: 'white', display: 'block' }}>Home</Button>
+            <Button component={Link} to="/product" sx={{ my: 2, color: 'white', display: 'block' }}>Products</Button>
+            <Button component={Link} to="/about" sx={{ my: 2, color: 'white', display: 'block' }}>About Us</Button>
+            <Button component={Link} to="/profile" sx={{ my: 2, color: 'white', display: 'block' }}>Profile</Button>
+            <Button component={Link} to="/contact" sx={{ my: 2, color: 'white', display: 'block' }}>Contact Us</Button>
           </Box>
 
-          {/* أيقونة السلة + الأفاتار + قائمة المستخدم */}
+          {/* السلة والأفاتار */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            {/* أيقونة السلة */}
             <IconButton color="inherit">
               <Badge badgeContent={3} color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
 
-            {/* الأفاتار */}
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
-
-              {/* قائمة المستخدم */}
               <Menu
                 sx={{ mt: '45px' }}
                 id="menu-appbar"
