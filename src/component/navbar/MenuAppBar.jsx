@@ -14,15 +14,15 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from '@tanstack/react-query';
 
-const settings = ['Profile',  'Dashboard', 'Logout'];
+const settings = ['Profile', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const navigate = useNavigate();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -54,6 +54,7 @@ function ResponsiveAppBar() {
 
 
   return (
+    
     <AppBar position="static" sx={{ backgroundColor: "#070e25ff" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -63,7 +64,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component={Link}
-            to="/"
+            to="/home"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -105,7 +106,7 @@ function ResponsiveAppBar() {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              <MenuItem component={Link} to="/" onClick={handleCloseNavMenu}>Home</MenuItem>
+              <MenuItem component={Link} to="/home" onClick={handleCloseNavMenu}>Home</MenuItem>
               <MenuItem component={Link} to="/product" onClick={handleCloseNavMenu}>Products</MenuItem>
               <MenuItem component={Link} to="/about" onClick={handleCloseNavMenu}>About Us</MenuItem>
             </Menu>
@@ -133,10 +134,11 @@ function ResponsiveAppBar() {
 
           {/* روابط الصفحات (لشاشة كبيرة) */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2 }}>
-            <Button component={Link} to="/" sx={{ my: 2, color: 'white', display: 'block' }}>Home</Button>
+            <Button component={Link} to="/home" sx={{ my: 2, color: 'white', display: 'block' }}>Home</Button>
             <Button component={Link} to="/product" sx={{ my: 2, color: 'white', display: 'block' }}>Products</Button>
             <Button component={Link} to="/about" sx={{ my: 2, color: 'white', display: 'block' }}>About Us</Button>
                     <Button component={Link} to="/Profile" sx={{ my: 2, color: 'white', display: 'block' }}>Profile</Button>
+                    <Button component={Link} to="/" sx={{ my: 2, color: 'white', display: 'block' }}>logout</Button>
 
           </Box>
 
@@ -170,8 +172,20 @@ function ResponsiveAppBar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                
+                  {settings.map((setting) => (
+    <MenuItem 
+      key={setting} 
+      onClick={() => {
+        handleCloseUserMenu();
+        if (setting === "Logout") {
+          navigate('/'); 
+        }
+        if (setting === "Profile") {
+          navigate('/Profile'); 
+        }
+      }}
+    >
                     <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
                   </MenuItem>
                 ))}

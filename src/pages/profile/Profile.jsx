@@ -11,7 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Typography from '@mui/material/Typography';
-
+import ResponsiveAppBar from '../../component/navbar/MenuAppBar';
 export default function Profile() {
   const [open, setOpen] = React.useState(false);
 
@@ -51,11 +51,14 @@ export default function Profile() {
   );
 
   return (
+   <>
+    <ResponsiveAppBar />
     <Box sx={{ p: 3 }}>
       <Button variant="contained" onClick={toggleDrawer(true)}>Open drawer</Button>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
     </Box>
+    </>
   );
 }

@@ -13,9 +13,9 @@ export default function Register() {
     try {
       const request = await axios.post(`https://kashop1.runasp.net/api/Identity/Account/Register`, data);
       console.log(" Registration successful:", request.data);
-      navigate('/login');
+      navigate('/');
     } catch (error) {
-      console.error(" Registration failed:", error);
+  console.error("Registration failed:", error.response?.data || error);
     }
   };
 

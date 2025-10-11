@@ -15,7 +15,7 @@ export default function ResetPassword() {
       const response = await axios.patch(`https://kashop1.runasp.net/api/Identity/Account/reset-password`, data);
       console.log("✅ Password reset successful:", response.data);
       setMessage("✅ Password has been reset successfully!");
-      setTimeout(() => navigate('/login'), 2000); // بعد ثانيتين يرجع لصفحة تسجيل الدخول
+      setTimeout(() => navigate('/'), 2000); // بعد ثانيتين يرجع لصفحة تسجيل الدخول
     } catch (error) {
       console.error(error);
       setMessage("❌ Failed to reset password. Please check your code or email.");
@@ -94,7 +94,7 @@ export default function ResetPassword() {
 
         <Box mt={2} textAlign="center">
           <Typography variant="body2">
-            <Button onClick={() => navigate('/login')} sx={{ textTransform: 'none' }}>
+            <Button onClick={() => navigate('/')} sx={{ textTransform: 'none' }}>
               Back to Login
             </Button>
           </Typography>

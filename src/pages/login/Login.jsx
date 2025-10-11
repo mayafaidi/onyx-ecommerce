@@ -12,10 +12,10 @@ export default function Login() {
   const onSubmit = async (data) => {
     try {
       const request = await axios.post(`https://kashop1.runasp.net/api/Identity/Account/Login`, data);
-      console.log("✅ Login successful:", request.data);
+      console.log(" Login successful:", request.data);
       navigate('/home');
     } catch (error) {
-      console.error("❌ Login failed:", error);
+      console.error(" Login failed:", error);
     }
   };
 
