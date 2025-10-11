@@ -17,7 +17,7 @@ import Badge from '@mui/material/Badge';
 import { Link } from "react-router-dom";
 import { useQuery } from '@tanstack/react-query';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile',  'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -136,8 +136,8 @@ function ResponsiveAppBar() {
             <Button component={Link} to="/" sx={{ my: 2, color: 'white', display: 'block' }}>Home</Button>
             <Button component={Link} to="/product" sx={{ my: 2, color: 'white', display: 'block' }}>Products</Button>
             <Button component={Link} to="/about" sx={{ my: 2, color: 'white', display: 'block' }}>About Us</Button>
-            <Button component={Link} to="/profile" sx={{ my: 2, color: 'white', display: 'block' }}>Profile</Button>
-            <Button component={Link} to="/contact" sx={{ my: 2, color: 'white', display: 'block' }}>Contact Us</Button>
+                    <Button component={Link} to="/Profile" sx={{ my: 2, color: 'white', display: 'block' }}>Profile</Button>
+
           </Box>
 
           {/* السلة والأفاتار */}

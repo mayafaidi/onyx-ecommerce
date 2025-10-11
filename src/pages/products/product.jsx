@@ -4,6 +4,7 @@ import Footer from '../../component/footer/Footer';
 import AxiosIntanse from '../../AxiosIntanse';
 import { useQuery } from '@tanstack/react-query';
 import { Box, Typography, Grid, Card, CardContent, CardMedia, Button } from '@mui/material';
+import homeImg from '../../assets/imges/home1.png';
 
 export default function Product() {
 
@@ -71,10 +72,21 @@ const fetchCategories = async () => {
   return (
     <>
       <ResponsiveAppBar />
-
+<Box
+  sx={{
+    backgroundImage: `url(${homeImg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    minHeight: '100vh',
+    width: '100%',
+    backgroundAttachment: 'fixed', // يعطيك تأثير ثابت للخلفية
+    padding: '40px 0',
+  }}
+>
       {/* عرض المنتجات */}
-      <Box sx={{ padding: '40px', minHeight: '100vh', backgroundColor: '#f7f7f7' }}>
-        <Typography variant="h4" sx={{ mb: 4, textAlign: 'center', color: '#333', fontWeight: 'bold' }}>
+      <Box sx={{ padding: '40px', minHeight: '100vh' }}>
+        <Typography variant="h4" sx={{ mb: 4, textAlign: 'center', color: '#ffffffff', fontWeight: 'bold' }}>
           🛍️ Our Products
         </Typography>
 
@@ -115,8 +127,8 @@ const fetchCategories = async () => {
       </Box>
 
       {/* عرض العلامات التجارية */}
-      <Box sx={{ padding: '40px', minHeight: '50vh', backgroundColor: '#f7f7f7' }}>
-  <Typography variant="h4" sx={{ mb: 4, textAlign: 'center', color: '#333', fontWeight: 'bold' }}>
+      <Box sx={{ padding: '40px', minHeight: '50vh' }}>
+  <Typography variant="h4" sx={{ mb: 4, textAlign: 'center', color: '#ffffffff', fontWeight: 'bold' }}>
     🔖 Our Brands
   </Typography>
 
@@ -174,8 +186,8 @@ const fetchCategories = async () => {
 </Box>
 
  {/* عرض المنتجات */}
-      <Box sx={{ padding: '40px', minHeight: '100vh', backgroundColor: '#f7f7f7' }}>
-        <Typography variant="h4" sx={{ mb: 4, textAlign: 'center', color: '#333', fontWeight: 'bold' }}>
+      <Box sx={{ padding: '40px', minHeight: '100vh' }}>
+        <Typography variant="h4" sx={{ mb: 4, textAlign: 'center', color: '#ffffffff', fontWeight: 'bold' }}>
           🛍️ Our Categories
         </Typography>
 
@@ -209,7 +221,7 @@ const fetchCategories = async () => {
         </Grid>
       </Box>
 
-
+</Box>
 
 
 
