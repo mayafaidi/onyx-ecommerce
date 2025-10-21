@@ -10,14 +10,24 @@ export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
-    try {
-      const request = await axios.post(`https://kashop1.runasp.net/api/Identity/Account/Login`, data);
-      console.log(" Login successful:", request.data);
-      navigate('/home');
-    } catch (error) {
-      console.error(" Login failed:", error);
+  try {
+    const request = await axios.post(`https://kashop1.runasp.net/api/Identity/Account/Login`, data);
+    console.log("Login successful:", request.data);
+
+    // ✅ احفظ التوكن في LocalStorage
+    const token = request.data.token || request.data.data?.token;
+    if (token) {
+      localStorage.setItem('userToken', token);
+    } else {
+      console.warn(" No token found in response:", request.data);
     }
-  };
+
+    navigate('/home');
+  } catch (error) {
+    console.error("Login failed:", error);
+  }
+};
+
 
   return (
     <Box

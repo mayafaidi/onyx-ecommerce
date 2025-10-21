@@ -7,6 +7,7 @@ import Login from '../src/pages/login/Login';
 import Register from '../src/pages/register/Register';
 import ForgotPassword from '../src/pages/forgetpassword/Forgetpassword';
 import ResetPassword from '../src/pages/resetpassword/Resetpassword';
+import About from '../src/pages/about/About';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export default function App() {
@@ -20,6 +21,8 @@ export default function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/product' element={<Product />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/About' element={<About />} />
+
           <Route path='/register' element={<Register />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />

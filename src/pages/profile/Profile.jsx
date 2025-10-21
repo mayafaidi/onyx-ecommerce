@@ -12,6 +12,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Typography from '@mui/material/Typography';
 import ResponsiveAppBar from '../../component/navbar/MenuAppBar';
+import homeImg from '../../assets/imges/home1.png';
 export default function Profile() {
   const [open, setOpen] = React.useState(false);
 
@@ -53,11 +54,21 @@ export default function Profile() {
   return (
    <>
     <ResponsiveAppBar />
-    <Box sx={{ p: 3 }}>
+<Box
+      sx={{
+        backgroundImage: `url(${homeImg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        width: "100%",
+        color: "#fff",
+      }}
+    >    <Box sx={{ p: 3}}>
       <Button variant="contained" onClick={toggleDrawer(true)}>Open drawer</Button>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
+    </Box>
     </Box>
     </>
   );

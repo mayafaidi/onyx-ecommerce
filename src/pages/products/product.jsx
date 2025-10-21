@@ -5,8 +5,10 @@ import AxiosIntanse from '../../AxiosIntanse';
 import { useQuery } from '@tanstack/react-query';
 import { Box, Typography, Grid, Card, CardContent, CardMedia, Button } from '@mui/material';
 import homeImg from '../../assets/imges/home1.png';
+import { useTranslation } from 'react-i18next'; 
 
 export default function Product() {
+   const { t, i18n } = useTranslation();
 
   // دالة لجلب المنتجات
   const fetchProducts = async () => {
@@ -26,6 +28,24 @@ const fetchCategories = async () => {
     console.log("Categories response:", response.data);
     return response.data || [];
   };
+const addtocart = async (id) => {
+  try {
+    console.log("Adding product:", id);
+    const response = await AxiosIntanse.post("/Customer/Carts", { productId: id });
+    console.log(" Response:", response.data);
+  } catch (error) {
+    if (error.response) {
+      console.error(" Server Error:", error.response.status, error.response.data);
+    } else {
+      console.error(" Unknown Error:", error.message);
+    }
+  }
+};
+
+
+
+
+
   // React Query للمنتجات
   const {
     data: products = [],
@@ -87,7 +107,7 @@ const fetchCategories = async () => {
       {/* عرض المنتجات */}
       <Box sx={{ padding: '40px', minHeight: '100vh' }}>
         <Typography variant="h4" sx={{ mb: 4, textAlign: 'center', color: '#ffffffff', fontWeight: 'bold' }}>
-          🛍️ Our Products
+            {t('Products')}
         </Typography>
 
         <Grid container spacing={3} justifyContent="center">
@@ -115,10 +135,10 @@ const fetchCategories = async () => {
                     {product.name}
                   </Typography>
                   <Box>
-                    <Typography variant="body2" color="text.secondary">Price: ${product.price}</Typography>
-                    <Typography variant="body2" color="text.secondary">Quantity: {product.quantity}</Typography>
+                    <Typography variant="body2" color="text.secondary">{t('Price')}: ${product.price}</Typography>
+                    <Typography variant="body2" color="text.secondary">{t('Quantity')}: {product.quantity}</Typography>
                   </Box>
-                  <Button variant="contained" sx={{ mt: 2, backgroundColor: '#000' }}>Add to Cart</Button>
+                  <Button variant="contained" sx={{ mt: 2, backgroundColor: '#000' }} onClick={()=>addtocart(product.id)} >{t('AddtoCart')}</Button>
                 </CardContent>
               </Card>
             </Grid>
@@ -129,7 +149,7 @@ const fetchCategories = async () => {
       {/* عرض العلامات التجارية */}
       <Box sx={{ padding: '40px', minHeight: '50vh' }}>
   <Typography variant="h4" sx={{ mb: 4, textAlign: 'center', color: '#ffffffff', fontWeight: 'bold' }}>
-    🔖 Our Brands
+     {t('Brands')}
   </Typography>
 
   <Grid container spacing={3} justifyContent="center">

@@ -16,13 +16,16 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from '@tanstack/react-query';
-
+import { useTranslation } from 'react-i18next'; 
 const settings = ['Profile', 'Logout'];
+import AxiosIntanse from '../../AxiosIntanse';
+
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
+   const { t, i18n } = useTranslation();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -48,7 +51,29 @@ function ResponsiveAppBar() {
 // });
 
 // console.log("User profile data:", data); 
+const fetchCart = async () => {
+  const token = localStorage.getItem('userToken');
+  if (!token) {
+    console.warn(" No token found for fetching cart");
+    return [];
+  }
 
+  const response = await AxiosIntanse.get("/Customer/Carts", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  console.log("Cart response:", response.data);
+  return response.data.data || [];
+};
+
+
+const { data: cart = [], isLoading } = useQuery({
+  queryKey: ['cart'],
+  queryFn: fetchCart,
+  staleTime: 1000 * 60 * 5,
+});
 
 
 
@@ -106,9 +131,9 @@ function ResponsiveAppBar() {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              <MenuItem component={Link} to="/home" onClick={handleCloseNavMenu}>Home</MenuItem>
-              <MenuItem component={Link} to="/product" onClick={handleCloseNavMenu}>Products</MenuItem>
-              <MenuItem component={Link} to="/about" onClick={handleCloseNavMenu}>About Us</MenuItem>
+              <MenuItem component={Link} to="/home" onClick={handleCloseNavMenu}>{t('home')}</MenuItem>
+              <MenuItem component={Link} to="/product" onClick={handleCloseNavMenu}>{t('products')}</MenuItem>
+              <MenuItem component={Link} to="/About" onClick={handleCloseNavMenu}>{t('about')}</MenuItem>
             </Menu>
           </Box>
 
@@ -133,21 +158,35 @@ function ResponsiveAppBar() {
           </Typography>
 
           {/* روابط الصفحات (لشاشة كبيرة) */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2 }}>
-            <Button component={Link} to="/home" sx={{ my: 2, color: 'white', display: 'block' }}>Home</Button>
-            <Button component={Link} to="/product" sx={{ my: 2, color: 'white', display: 'block' }}>Products</Button>
-            <Button component={Link} to="/about" sx={{ my: 2, color: 'white', display: 'block' }}>About Us</Button>
-                    <Button component={Link} to="/Profile" sx={{ my: 2, color: 'white', display: 'block' }}>Profile</Button>
-                    <Button component={Link} to="/" sx={{ my: 2, color: 'white', display: 'block' }}>logout</Button>
-
+           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2 }}>
+            <Button component={Link} to="/home" sx={{ my: 2, color: 'white' }}>{t('home')}</Button>
+            <Button component={Link} to="/product" sx={{ my: 2, color: 'white' }}>{t('products')}</Button>
+            <Button component={Link} to="/About" sx={{ my: 2, color: 'white' }}>{t('about')}</Button>
+            <Button component={Link} to="/Profile" sx={{ my: 2, color: 'white' }}>{t('profile')}</Button>
+            <Button component={Link} to="/" sx={{ my: 2, color: 'white' }}>{t('logout')}</Button>
           </Box>
+<Button
+  variant="outlined"
+  sx={{
+    color: 'white',
+    borderColor: 'white',
+    textTransform: 'none',
+    ml: 2
+  }}
+  onClick={() => {
+    const newLang = i18n.language === 'en' ? 'ar' : 'en';
+    i18n.changeLanguage(newLang);
+  }}
+>
+  {i18n.language === 'en' ? 'العربية' : 'English'}
+</Button>
 
           {/* السلة والأفاتار */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <IconButton color="inherit">
-              <Badge badgeContent={3} color="error">
-                <ShoppingCartIcon />
-              </Badge>
+              <Badge badgeContent={isLoading ? 0 : cart.length} color="error">
+    <ShoppingCartIcon />
+  </Badge>
             </IconButton>
 
             <Box sx={{ flexGrow: 0 }}>
@@ -184,6 +223,7 @@ function ResponsiveAppBar() {
         if (setting === "Profile") {
           navigate('/Profile'); 
         }
+        
       }}
     >
                     <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
