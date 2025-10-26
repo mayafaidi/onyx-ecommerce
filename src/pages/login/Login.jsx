@@ -7,7 +7,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import homeImg from "../../assets/imges/home1.png";
 
-// ✅ مخطط التحقق Yup Schema
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -38,19 +37,18 @@ export default function Login() {
         data
       );
 
-      console.log("✅ Login successful:", response.data);
+      console.log("Login successful:", response.data);
 
-      // ✅ حفظ التوكن في LocalStorage
       const token = response.data.token || response.data.data?.token;
       if (token) {
         localStorage.setItem('userToken', token);
       } else {
-        console.warn("⚠️ No token found in response:", response.data);
+        console.warn(" No token found in response:", response.data);
       }
 
       navigate('/home');
     } catch (error) {
-      console.error("❌ Login failed:", error);
+      console.error("Login failed:", error);
       if (error.response?.data?.message) {
         setErrorMessage(error.response.data.message);
       } else {
@@ -80,7 +78,6 @@ export default function Login() {
         </Typography>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* 📨 Email */}
           <TextField
             {...register("email")}
             label="Email"
@@ -91,7 +88,6 @@ export default function Login() {
             helperText={errors.email?.message}
           />
 
-          {/* 🔒 Password */}
           <TextField
             {...register("password")}
             label="Password"
@@ -103,7 +99,6 @@ export default function Login() {
             helperText={errors.password?.message}
           />
 
-          {/* 🔘 Submit Button */}
           <Button
             type="submit"
             variant="contained"
@@ -116,7 +111,6 @@ export default function Login() {
           </Button>
         </form>
 
-        {/* ❗ رسالة خطأ */}
         {errorMessage && (
           <Typography
             variant="body2"
@@ -126,7 +120,6 @@ export default function Login() {
           </Typography>
         )}
 
-        {/* 🔗 روابط مساعدة */}
         <Box mt={2} textAlign="center">
           <Typography variant="body2">
             <Link to="/forgot-password" style={{ textDecoration: 'none', color: '#1976d2' }}>

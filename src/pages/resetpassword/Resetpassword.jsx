@@ -7,7 +7,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import homeImg from "../../assets/imges/home1.png";
 
-// ✅ مخطط التحقق Yup Schema
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -50,12 +49,12 @@ export default function ResetPassword() {
         }
       );
 
-      console.log("✅ Password reset successful:", response.data);
-      setMessage("✅ Password has been reset successfully!");
-      setTimeout(() => navigate('/'), 2000); // بعد ثانيتين يرجع لصفحة تسجيل الدخول
+      console.log("Password reset successful:", response.data);
+      setMessage(" Password has been reset successfully!");
+      setTimeout(() => navigate('/'), 2000); 
     } catch (error) {
-      console.error("❌ Error:", error.response?.data || error);
-      setMessage("❌ Failed to reset password. Please check your code or email.");
+      console.error(" Error:", error.response?.data || error);
+      setMessage(" Failed to reset password. Please check your code or email.");
     } finally {
       setLoading(false);
     }

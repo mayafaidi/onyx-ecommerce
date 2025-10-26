@@ -7,7 +7,6 @@ import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import homeImg from "../../assets/imges/home1.png";
 
-// ✅ تعريف مخطط التحقق Yup Schema
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -49,15 +48,15 @@ export default function Register() {
         `https://kashop1.runasp.net/api/Identity/Account/Register`,
         data
       );
-      console.log("✅ Registration successful:", response.data);
+      console.log(" Registration successful:", response.data);
 
-      setMessage("✅ Registration successful! Redirecting to login...");
+      setMessage("Registration successful! Redirecting to login...");
       setTimeout(() => navigate('/'), 2000);
     } catch (error) {
-      console.error("❌ Registration failed:", error.response?.data || error);
+      console.error("Registration failed:", error.response?.data || error);
       const errMsg =
         error.response?.data?.message || "Registration failed. Please try again.";
-      setMessage(`❌ ${errMsg}`);
+      setMessage(` ${errMsg}`);
     } finally {
       setLoading(false);
     }

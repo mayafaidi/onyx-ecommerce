@@ -18,7 +18,6 @@ export default function Profile() {
     setOpen(newOpen);
   };
 
-  // ✅ جلب بيانات المستخدم
   const getProfile = async () => {
     try {
       const response = await AxiosIntanse.get("/Users/profile");
@@ -37,7 +36,7 @@ export default function Profile() {
   const DrawerList = (
     <Box sx={{ width: 280, p: 2, color: "#333" }}>
       <Typography variant="h6" sx={{ mb: 2, textAlign: "center" }}>
-        👤 My Profile
+         My Profile
       </Typography>
       <Divider sx={{ mb: 2 }} />
 

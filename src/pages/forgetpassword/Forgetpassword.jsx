@@ -7,7 +7,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import homeImg from "../../assets/imges/home1.png";
 
-// ✅ تعريف مخطط التحقق Yup
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -19,7 +18,6 @@ export default function ForgotPassword() {
   const navigate = useNavigate();
   const [message, setMessage] = React.useState("");
 
-  // ✅ إعداد react-hook-form مع yupResolver
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
@@ -30,12 +28,12 @@ export default function ForgotPassword() {
         `https://kashop1.runasp.net/api/Identity/Account/forgot-password`,
         data
       );
-      console.log("✅ Password reset link sent:", response.data);
-      setMessage("✅ Password reset link sent to your email!");
+      console.log(" Password reset link sent:", response.data);
+      setMessage("Password reset link sent to your email!");
       navigate('/reset-password');
     } catch (error) {
       console.error(error);
-      setMessage("❌ Error sending password reset link. Please try again.");
+      setMessage(" Error sending password reset link. Please try again.");
     }
   };
 

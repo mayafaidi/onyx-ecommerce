@@ -84,7 +84,7 @@ const { data: cart = [], isLoading } = useQuery({
       <Container maxWidth="xl">
         <Toolbar disableGutters>
 
-          {/* شعار الموقع */}
+          
           <Typography
             variant="h6"
             noWrap
@@ -103,7 +103,6 @@ const { data: cart = [], isLoading } = useQuery({
             Onyx
           </Typography>
 
-          {/* قائمة الجوال */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -137,7 +136,6 @@ const { data: cart = [], isLoading } = useQuery({
             </Menu>
           </Box>
 
-          {/* شعار الجوال */}
           <Typography
             variant="h5"
             noWrap
@@ -157,7 +155,6 @@ const { data: cart = [], isLoading } = useQuery({
             Onyx
           </Typography>
 
-          {/* روابط الصفحات (لشاشة كبيرة) */}
            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2 }}>
             <Button component={Link} to="/home" sx={{ my: 2, color: 'white' }}>{t('home')}</Button>
             <Button component={Link} to="/product" sx={{ my: 2, color: 'white' }}>{t('products')}</Button>
@@ -181,7 +178,6 @@ const { data: cart = [], isLoading } = useQuery({
   {i18n.language === 'en' ? 'العربية' : 'English'}
 </Button>
 
-          {/* السلة والأفاتار */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <IconButton color="inherit" component={Link} to="/cart">
               <Badge badgeContent={isLoading ? 0 : cart.length} color="error">

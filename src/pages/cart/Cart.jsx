@@ -106,21 +106,7 @@ catch(err){
 
 };
 
-const checkoutPayment  =async(paymentMethod)=>{
-try{
-const payment=await AxiosIntanse.post("/Customer/CheckOut/payment", {
-      paymentMethod, 
-    });
-setcartitem([]);//فرغت السلة 
 
-
-}
-catch(err){
-  console.log(err);
-}
-
-
-};
 
 
 

@@ -3,7 +3,7 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
 i18n
-  .use(LanguageDetector) // يكتشف لغة المستخدم تلقائيًا
+  .use(LanguageDetector) 
   .use(initReactI18next)
   .init({
     resources: {
