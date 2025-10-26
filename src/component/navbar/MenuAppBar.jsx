@@ -183,7 +183,7 @@ const { data: cart = [], isLoading } = useQuery({
 
           {/* السلة والأفاتار */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <IconButton color="inherit">
+            <IconButton color="inherit" component={Link} to="/cart">
               <Badge badgeContent={isLoading ? 0 : cart.length} color="error">
     <ShoppingCartIcon />
   </Badge>

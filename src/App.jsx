@@ -9,6 +9,7 @@ import ForgotPassword from '../src/pages/forgetpassword/Forgetpassword';
 import ResetPassword from '../src/pages/resetpassword/Resetpassword';
 import About from '../src/pages/about/About';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Cart from './pages/cart/Cart';
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -26,6 +27,9 @@ export default function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
+
+          <Route path='/cart' element={<Cart />} />
+
         </Routes>
       </Router>
     </QueryClientProvider>
