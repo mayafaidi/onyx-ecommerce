@@ -1,21 +1,38 @@
 import React from 'react';
 import { Box, Button, Typography, Container, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import homeImg from "../../assets/imges/home1.png";
 
+// ✅ تعريف مخطط التحقق Yup
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .required("Email is required")
+    .email("Please enter a valid email address"),
+});
+
 export default function ForgotPassword() {
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm();
   const [message, setMessage] = React.useState("");
+
+  // ✅ إعداد react-hook-form مع yupResolver
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`https://kashop1.runasp.net/api/Identity/Account/forgot-password`, data);
+      const response = await axios.post(
+        `https://kashop1.runasp.net/api/Identity/Account/forgot-password`,
+        data
+      );
       console.log("✅ Password reset link sent:", response.data);
       setMessage("✅ Password reset link sent to your email!");
-       navigate('/reset-password');
+      navigate('/reset-password');
     } catch (error) {
       console.error(error);
       setMessage("❌ Error sending password reset link. Please try again.");
@@ -35,13 +52,13 @@ export default function ForgotPassword() {
       }}
     >
       <Container maxWidth="sm">
-        <Typography variant="h3" sx={{ mb: 3, textAlign: "center" }}>
+        <Typography variant="h3" sx={{ mb: 3, textAlign: "center", color: "white" }}>
           Forgot Password
         </Typography>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
-            {...register("email", { required: "Email is required" })}
+            {...register("email")}
             label="Email"
             variant="outlined"
             fullWidth
@@ -59,20 +76,21 @@ export default function ForgotPassword() {
             sx={{ mt: 2 }}
           >
             Send Reset Link
-            
           </Button>
         </form>
 
         {message && (
           <Typography
             variant="body1"
-            sx={{ mt: 3, textAlign: "center", color: message.startsWith("✅") ? "green" : "red" }}
+            sx={{
+              mt: 3,
+              textAlign: "center",
+              color: message.startsWith("✅") ? "lightgreen" : "red",
+            }}
           >
             {message}
           </Typography>
         )}
-
-        
       </Container>
     </Box>
   );

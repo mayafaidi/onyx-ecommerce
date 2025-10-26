@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 
 export default function Product() {
   const { t } = useTranslation();
-
+const [isPaid, setIsPaid] = useState(false);
   // 🧠 كل منتج له تقييم وتعليق خاص فيه
   const [reviews, setReviews] = useState({});
 
@@ -101,11 +101,13 @@ const handleCheckout = async () => {
     });
     console.log("✅ Checkout successful:", response.data);
     alert("Payment successful! You can now review your product.");
+    setIsPaid(true); // ✅ نفعّل إمكانية التقييم
   } catch (error) {
     console.error("❌ Checkout error:", error.response?.data || error.message);
     alert("Checkout failed. Try again later.");
   }
 };
+
 
 
 
@@ -182,7 +184,7 @@ const handleCheckout = async () => {
                     alt={product.name}
                   />
                   <CardContent>
-                    <Typography gutterBottom variant="h6" noWrap>
+                    <Typography gutterBottom variant="h6" >
                       {product.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
@@ -236,12 +238,14 @@ const handleCheckout = async () => {
                     />
 
                     <Button
-                      variant="outlined"
-                      sx={{ mt: 1 }}
-                      onClick={() => addReview(product.id)}
-                    >
-                      Submit Review
-                    </Button>
+  variant="outlined"
+  sx={{ mt: 1 }}
+  disabled={!isPaid}
+  onClick={() => addReview(product.id)}
+>
+  Submit Review
+</Button>
+
                   </CardContent>
                 </Card>
               </Grid>
