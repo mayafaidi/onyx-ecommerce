@@ -108,6 +108,27 @@ catch(err){
 
 };
 
+const checkoutPayment = async (method) => {
+  try {
+    const response = await AxiosIntanse.post(`/Customer/CheckOut/payment`, {
+      paymentMethod: method,
+    });
+
+    console.log("Payment Response:", response.data);
+
+    // إذا الـ API يرجع رابط للدفع
+    if (response.data?.url) {
+      window.location.href = response.data.url; 
+    } else {
+      alert("Payment completed successfully!");
+    }
+
+  } catch (error) {
+    console.log("Payment error:", error);
+    alert("Payment failed. Please try again.");
+  }
+};
+
 
 
 
@@ -156,10 +177,12 @@ useEffect(() => {
   </div>
 
 ))}
-{/* <Box  sx={{left:'20px',marginTop: '10px'}}>
+<Box  sx={{left:'20px',marginTop: '10px'}}>
       <Button   variant="outlined"  color="error" onClick={clearcart} > clear cart</Button>
-<Button variant="contained" color="success" onClick={() => checkoutPayment("Visa")}> Checkout with Visa</Button>
-</Box> */}
+<Button variant="contained" color="success" onClick={() => checkoutPayment("Visa")}>
+  Checkout with Visa
+</Button>
+</Box>
     </>
   )
 }

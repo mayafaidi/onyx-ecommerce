@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 export default function Product() {
   const { t } = useTranslation();
 const [isPaid, setIsPaid] = useState(false);
-  const [reviews, setReviews] = useState({});
+  // const [reviews, setReviews] = useState({});
 
   const fetchProducts = async () => {
     const response = await AxiosIntanse.get("/Customer/Products");

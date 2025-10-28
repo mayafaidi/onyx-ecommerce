@@ -69,7 +69,7 @@ export default function Profile() {
           </Typography>
         </Box>
       ) : (
-        <Typography color="error">Failed to load user data.</Typography>
+        <Typography color="error">failed to load user data.</Typography>
       )}
     </Box>
   );

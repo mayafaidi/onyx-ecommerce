@@ -16,10 +16,7 @@ const schema = yup.object().shape({
     .string()
     .required("Reset code is required")
     .length(6, "Reset code must be 6 digits"),
-  newPassword: yup
-    .string()
-    .required("New password is required")
-    .min(6, "Password must be at least 6 characters"),
+ 
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('newPassword')], "Passwords do not match")
@@ -105,7 +102,7 @@ export default function ResetPassword() {
             variant="outlined"
             fullWidth
             margin="normal"
-            error={!!errors.newPassword}
+            
             helperText={errors.newPassword?.message}
           />
 
