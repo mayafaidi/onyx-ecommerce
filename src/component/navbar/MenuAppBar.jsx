@@ -39,22 +39,11 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-//   const fetchprofile = async ()=>{
-// const response = await AxiosIntanse.get("/Users/profile");
-// return response.data;
-// }
 
-// const { data, isLoading, error } = useQuery({
-//   queryKey: ['User'],
-//   queryFn: fetchprofile,
-//   staleTime: 1000 * 60 * 5,
-// });
-
-// console.log("User profile data:", data); 
 const fetchCart = async () => {
   const token = localStorage.getItem('userToken');
   if (!token) {
-    console.warn(" No token found for fetching cart");
+    console.log(" no token found ");
     return [];
   }
 
@@ -64,15 +53,15 @@ const fetchCart = async () => {
     },
   });
 
-  console.log("Cart response:", response.data);
+  console.log("cart response:", response.data);
   return response.data.data || [];
 };
 
 
 const { data: cart = [], isLoading } = useQuery({
-  queryKey: ['cart'],
-  queryFn: fetchCart,
-  staleTime: 1000 * 60 * 5,
+  queryKey: ['cart'],//key
+  queryFn: fetchCart,//جبنا بيناتات من api
+  staleTime: 1000 * 60 * 5,//لاتعيد طلب بيناتات لمدة 5د بعدها نرسل طلب 
 });
 
 

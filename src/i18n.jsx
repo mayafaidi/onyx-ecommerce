@@ -3,8 +3,8 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
 i18n
-  .use(LanguageDetector) 
-  .use(initReactI18next)
+  .use(LanguageDetector) //بايي ديفولت
+  .use(initReactI18next)//لربط رياكت مع i18n
   .init({
     resources: {
       en: {

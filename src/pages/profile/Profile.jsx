@@ -10,11 +10,11 @@ import { Avatar, CircularProgress } from "@mui/material";
 import AxiosIntanse from "../../AxiosIntanse";
 
 export default function Profile() {
-  const [open, setOpen] = React.useState(false);
-  const [userData, setUserData] = React.useState(null);
+  const [open, setOpen] = React.useState(false);//فتحت سكرتت
+  const [userData, setUserData] = React.useState(null);//خزنت فيها الاسم والخ
   const [isLoading, setIsLoading] = React.useState(true);
 
-  const toggleDrawer = (newOpen) => () => {
+  const toggleDrawer = (newOpen) => () => {//عشان الفتح وتسكير
     setOpen(newOpen);
   };
 

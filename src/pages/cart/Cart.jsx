@@ -6,7 +6,7 @@ import ResponsiveAppBar from '../../component/navbar/MenuAppBar';
 
 export default function Cart() {
 //لازم انشا عشان اخزن الداتا 
-const [cartitem,setcartitem]=useState([]);
+const [cartitem,setcartitem]=useState([]);//data
 const [isLoading, setIsLoading] = useState(true);
 
 const getcart=async()=>{
@@ -32,7 +32,8 @@ try{
 const response = await AxiosIntanse.delete(`/Customer/Carts/${productId}`);
 //تمام api وبعدها دحدث صفحة بدون ما اعمل ريفريش كيف
 const updatedCart = cartitem.filter((item) => item.productId !== productId);
-setcartitem(updatedCart);
+///يعني عشان احذف المنتج بدون مااعمل ريفريش بعمل فلتلر
+setcartitem(updatedCart);//بحدث الصفحة فالمنتج بختفي من الشاشة 
 }
 catch(error){
 console.log("error",error);
@@ -65,12 +66,13 @@ catch(error){
 const increaceqty =async(productId)=>{
 try{
 const response = await AxiosIntanse.post(`/Customer/Carts/increment/${productId}`);
+//رح نمشي على كل عناصر ازا كان هاد المنتج لبدنا ياه بنزيددو
 const updatedCart = cartitem.map((item) =>
         item.productId === productId
           ? { ...item, count: item.count + 1, totalPrice: item.totalPrice + item.price }
           : item
       );
-      setcartitem(updatedCart);
+      setcartitem(updatedCart);//نحدث الصفحة
 }
 catch(err){
   console.log(err);
@@ -112,6 +114,7 @@ catch(err){
 
 
 //عشان استدعيها لازم 
+//بتشتغل اول ماتفتح الصفحة 
 useEffect(() => {
   getcart();
 }, []);
@@ -153,10 +156,10 @@ useEffect(() => {
   </div>
 
 ))}
-<Box  sx={{left:'20px',marginTop: '10px'}}>
+{/* <Box  sx={{left:'20px',marginTop: '10px'}}>
       <Button   variant="outlined"  color="error" onClick={clearcart} > clear cart</Button>
 <Button variant="contained" color="success" onClick={() => checkoutPayment("Visa")}> Checkout with Visa</Button>
-</Box>
+</Box> */}
     </>
   )
 }

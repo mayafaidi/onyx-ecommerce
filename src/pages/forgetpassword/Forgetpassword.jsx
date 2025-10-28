@@ -17,11 +17,12 @@ const schema = yup.object().shape({
 export default function ForgotPassword() {
   const navigate = useNavigate();
   const [message, setMessage] = React.useState("");
-
+  //طريقة تانية عشان مااستوردت يوس ستيت فبعمل رياكت دوت
+//بربط ال form +yup 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
-
+//Api
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
@@ -35,7 +36,7 @@ export default function ForgotPassword() {
       console.error(error);
       setMessage(" Error sending password reset link. Please try again.");
     }
-  };
+  }; 
 
   return (
     <Box

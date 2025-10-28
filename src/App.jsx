@@ -12,10 +12,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Cart from './pages/cart/Cart';
 
 export default function App() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient();//تمام انا انشاءت مخزن بيناتات=ت كاش 
 
   return (
     <QueryClientProvider client={queryClient}>
+      {/* فسمحت لكل مشروع يستخدم رايكت كوري */}
       <Router>
         <Routes>
           <Route path='/' element={<Login />} />
